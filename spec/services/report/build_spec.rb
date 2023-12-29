@@ -154,7 +154,7 @@ describe Report::Build do
 
           it 'returns an error informing the valid coordinates range' do
             expect(Report::Build.call(input))
-              .to eq("Invalid command: 'PLACE 7,3,WEST', coordinates must be between 0 and 4")
+              .to eq("Invalid command: 'PLACE 7,3,WEST'. Coordinates must be between 0 and 4")
           end
         end
 
@@ -168,7 +168,7 @@ describe Report::Build do
 
           it 'returns an error informing the valid coordinates range' do
             expect(Report::Build.call(input))
-              .to eq("Invalid command: 'PLACE 2,-4,WEST', coordinates must be between 0 and 4")
+              .to eq("Invalid command: 'PLACE 2,-4,WEST'. Coordinates must be between 0 and 4")
           end
         end
 
@@ -182,7 +182,7 @@ describe Report::Build do
 
           it 'returns an error informing the valid directions options' do
             expect(Report::Build.call(input))
-              .to eq("Invalid command: 'PLACE 2,3,NORTHWEST', directions must be: NORTH, EAST, SOUTH or WEST")
+              .to eq("Invalid command: 'PLACE 2,3,NORTHWEST'. Direction must be: NORTH, EAST, SOUTH or WEST")
           end
         end
 
@@ -196,7 +196,7 @@ describe Report::Build do
 
           it 'returns an error informing the valid coordinates and directions' do
             expect(Report::Build.call(input))
-              .to eq("Invalid command: 'PLACE 21,12,NORTHWEST', directions must be: NORTH, EAST, SOUTH or WEST")
+              .to eq("Invalid command: 'PLACE 21,12,NORTHWEST'. Direction must be: NORTH, EAST, SOUTH or WEST")
           end
         end
 
@@ -216,21 +216,16 @@ describe Report::Build do
           end
         end
 
-        context 'with two valid PLACE command' do
+        context 'when place command missing a comma' do
           let(:input) do
-            "PLACE 4,3,SOUTH\n" \
-            "MOVE\n"\
-            "MOVE\n"\
-            "PLACE 1,2,EAST\n" \
-            "MOVE\n"\
-            "MOVE\n"\
-            "RIGHT\n"\
-            "MOVE\n"\
+            "PLACE 1,2, EAST\n" \
+            "PLACE 4,3 SOUTH\n" \
             'REPORT'
           end
 
           it 'ignores everything until a valid command PLACE is given' do
-            expect(Report::Build.call(input)).to eq('3,3,SOUTH')
+            expect(Report::Build.call(input)).to eq("Invalid command: 'PLACE 4,3 SOUTH'. The command is invalid. "\
+                                                    "Check your writing and try again")
           end
         end
       end

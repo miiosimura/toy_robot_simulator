@@ -1,4 +1,6 @@
 require 'colorize'
+require 'dry/monads'
+require_relative '../services/report/validate_place_command'
 require_relative '../services/report/generate_coordinates'
 require_relative '../services/report/build'
 require_relative '../services/report/move'
@@ -20,29 +22,29 @@ puts 'RIGHT'.blue
 puts 'REPORT'.blue
 puts ''
 
+puts 'The program is finished when REPORT command is executed'
+
 continue = 'Y'
 
 while %w[YES Y].include?(continue.upcase)
   commands = ''
 
   loop do
-    print '* Please place your robot on the table: '.green
-    first_place = gets.chomp
-    _, _, _, error = Report::GenerateCoordinates.call(first_place)
-
-    commands = first_place
-
-    break if error.nil?
-
-    puts error.red
-    puts ''
-  end
-
-  loop do
-    print '* Please enter your next command [MOVE, LEFT, RIGHT, REPORT]: '.green
+    print '* Please enter your command [MOVE, LEFT, RIGHT, REPORT]: '.green
     movement = gets.chomp
 
-    commands.concat("\n#{movement}")
+    if movement.upcase.start_with?('PLACE')
+      valid_place = Report::ValidatePlaceCommand.new(movement).call
+
+      if valid_place.success?
+        commands.concat("\n#{movement}")
+      else
+        puts valid_place&.failure.red
+        puts ''
+      end
+    else
+      commands.concat("\n#{movement}")
+    end
 
     break if movement.upcase == 'REPORT'
   end
