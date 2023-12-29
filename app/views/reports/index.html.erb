@@ -1,0 +1,35 @@
+<h2>Toy Robot Simulator</h2>
+<table class="table-bordered">
+  <% 0.upto(4) do |column| %>
+    <tr>
+      <% 0.upto(4) do |row| %>
+        <td>
+          <% if row.to_s == params[:row] && column.to_s == params[:column] %>
+            <button class="table-pieces" id=<%= params[:direction] %>>🤖</button>
+          <% else %>
+            <%= button_to '⚪', { controller: "reports", action: "place", row: row, column: column, direction: params[:direction] }, method: :post, class: "table-pieces"  %>
+          <% end %>
+        </td>
+      <% end %>
+    </tr>
+  <% end %>
+</table>
+
+<h3>Place the robot on the table</h3>
+<%= form_with url: "/place", method: :post do |form| %>
+  Row: <%= form.select :row, [0, 1, 2, 3, 4], selected: params[:row] %>
+  Column: <%= form.select :column, [0, 1, 2, 3, 4], selected: params[:column] %>
+  Direction: <%= form.select :direction, ["NORTH", "EAST", "SOUTH", "WEST"], selected: params[:direction] %><br><br>
+  <center><%= form.submit "PLACE", class:"fill" %></center>
+<% end %>
+
+<h3>Actions</h3>
+<div class="inline-flex">
+  <%= button_to 'LEFT', { controller: "reports", action: "left", row: params[:row], column: params[:column], direction: params[:direction] }, method: :post, class: "fill"  %>
+  <%= button_to 'MOVE', { controller: "reports", action: "move", row: params[:row], column: params[:column], direction: params[:direction] }, method: :post, class: "fill", id:"move_button"  %>
+  <%= button_to 'RIGHT', { controller: "reports", action: "right", row: params[:row], column: params[:column], direction: params[:direction] }, method: :post, class: "fill"  %>
+</div>
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.css" />
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@200&display=swap" rel="stylesheet" />

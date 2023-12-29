@@ -13,3 +13,101 @@
  *= require_tree .
  *= require_self
  */
+
+
+/* Directions */
+#NORTH {
+  rotate: 180deg;
+}
+
+#EAST {
+  rotate: 270deg;
+}
+
+#SOUTH {
+  rotate: 0deg;
+}
+
+#WEST {
+  rotate: 90deg;
+}
+
+/* table */
+
+table{
+  left: 50%;
+}
+.table-bordered {
+  background-color: #f1f1f1;
+  border-radius: 25px;
+}
+.table-bordered td, .table-bordered th {
+  padding: 1rem;
+}
+
+.table-pieces {
+	background: none;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+}
+
+
+/* button group */
+
+/* Page styling -- Not needed to replicate button visuals. */
+html,
+body {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  font-family: "Roboto Mono", monospace;
+}
+
+button {
+  margin: 10px;
+  font-family: inherit;
+}
+/* End of Page styling */
+
+/* Fill button styling */
+.fill {
+  font-size: 15px;
+  letter-spacing: 1px;
+  padding: 13px 25px 13px;
+  outline: 0;
+  border: 1px solid black;
+  cursor: pointer;
+  position: relative;
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.fill::after {
+  content: "";
+  background-color: #66f2d5;
+  width: 100%;
+  z-index: -1;
+  position: absolute;
+  height: 100%;
+  top: 7px;
+  left: 7px;
+  transition: 0.2s;
+}
+
+.fill:hover::after {
+  top: 0px;
+  left: 0px;
+}
+
+#move_button::after {
+  background-color: #fffc51;
+}
+/* End of Fill Button  */
+
+.inline-flex {
+  display: inline-flex;
+}
