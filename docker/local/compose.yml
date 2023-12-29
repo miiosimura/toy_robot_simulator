@@ -1,0 +1,10 @@
+version: "3.9"
+
+services:
+  toy_robot_simulator:
+    build:
+      context: ../..
+    volumes:
+      - ../../.:/toy_robot_simulator
+    ports:
+      - '3000:3000'
