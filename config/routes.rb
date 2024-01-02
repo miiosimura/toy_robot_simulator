@@ -10,8 +10,7 @@ Rails.application.routes.draw do
   root "reports#index"
   post "place", to: "reports#place"
   post "move", to: "reports#move"
-  post "right", to: "reports#right"
-  post "left", to: "reports#left"
+  post "change_direction", to: "reports#change_direction"
 
   # Defines the root path route ("/")
   # root "posts#index"

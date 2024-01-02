@@ -18,7 +18,7 @@ module Report
     }
 
     def self.call(command, direction)
-      ROTATE[command][direction]
+      ROTATE[command.upcase][direction.upcase]
     end
   end
 end

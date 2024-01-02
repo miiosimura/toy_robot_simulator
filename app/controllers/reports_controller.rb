@@ -1,8 +1,7 @@
 # frozen_string_literal: true
 
 class ReportsController < ApplicationController
-  def index
-  end
+  def index; end
 
   def place
     redirect_to action: :index, row: params[:row], column: params[:column], direction: params[:direction]
@@ -13,13 +12,8 @@ class ReportsController < ApplicationController
     redirect_to action: :index, row: row, column: column, direction: params[:direction]
   end
 
-  def right
-    direction = Report::Rotate.call('RIGHT', params[:direction])
-    redirect_to action: :index, row: params[:row], column: params[:column], direction: direction
-  end
-
-  def left
-    direction = Report::Rotate.call('LEFT', params[:direction])
+  def change_direction
+    direction = Report::Rotate.call(params[:command], params[:direction])
     redirect_to action: :index, row: params[:row], column: params[:column], direction: direction
   end
 end
