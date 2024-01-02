@@ -1,24 +1,31 @@
-# README
+# Simulador Robô de Brinquedo
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Esta aplicação consiste em simular um robô de brinquedo movendo-se sobre uma mesa de 5x5.
 
-Things you may want to cover:
+## Iniciando a aplicação:
 
-* Ruby version
+### Interface de linha de comando (CLI):
 
-* System dependencies
+```bash
+ruby app/scripts/terminal_interface.rb
+```
 
-* Configuration
+![Alt text](image.png)
 
-* Database creation
+### Interface Web:
 
-* Database initialization
+Primeiramente, é necessário rodarmos o build do docker para configurar o ambiente:
 
-* How to run the test suite
+```bash
+docker compose -f docker/local/compose.yml build
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+Em seguida vamos subir nossa aplicação rodando:
 
-* Deployment instructions
+```bash
+docker compose -f docker/local/compose.yml up
+```
 
-* ...
+Feito isso, podemos acessar a aplicação em http://localhost:3000/
+
+![Alt text](web-interface.gif)
