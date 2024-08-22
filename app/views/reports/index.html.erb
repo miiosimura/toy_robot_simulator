@@ -29,5 +29,7 @@
   <%= button_to 'MOVE', { controller: "reports", action: "move", row: params[:row], column: params[:column], direction: params[:direction] }, method: :post, class: "fill", id:"move_button"  %>
   <%= button_to 'RIGHT', { controller: "reports", action: "change_direction", row: params[:row], column: params[:column], direction: params[:direction], command: "right" }, method: :post, class: "fill"  %>
 </div>
+<br>
+<center><%= link_to "REMOVE ROBOT FROM TABLE", "/" %></center>
 
 <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@200&display=swap" rel="stylesheet" />
