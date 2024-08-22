@@ -6,6 +6,16 @@ Esta aplicação consiste em simular um robô de brinquedo movendo-se sobre uma 
 
 ### Interface de linha de comando (CLI):
 
+Pré-requisitos
+* Ter ruby instalado na sua máquina
+* Ter o colorize e o dry-monads instalado. Caso não tenha rode:
+
+```bash
+sudo gem install colorize
+sudo gem install dry-monads
+```
+
+Executando a aplicação:
 ```bash
 ruby app/scripts/terminal_interface.rb
 ```
